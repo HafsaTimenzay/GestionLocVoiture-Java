@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-
 import javax.swing.DefaultListModel;
 
 public class GestionFlotte implements GestionCRUD{
@@ -24,7 +23,7 @@ public class GestionFlotte implements GestionCRUD{
             String nom = resultSet.getString("nom");
             double note = resultSet.getDouble("note");
             
-            // Store student ID and data in the map
+            // Store student ID and data in the map                               
             listModel.addElement(nom + " : " + note);
             EtudiantMap.put(id, nom + " : " + note);
         }
