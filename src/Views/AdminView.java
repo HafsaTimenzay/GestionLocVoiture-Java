@@ -3,15 +3,14 @@ package Views;
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import java.util.HashMap;
-import java.util.Map;
+// import java.awt.event.ActionEvent;
+// import java.awt.event.ActionListener;
+// import javax.swing.event.ListSelectionEvent;
+// import javax.swing.event.ListSelectionListener;
+// import java.util.HashMap;
+// import java.util.Map;
 
 public class AdminView extends JFrame{
 
@@ -33,7 +32,7 @@ public class AdminView extends JFrame{
         TopPanel.setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 10));
 
         // logout button
-        JButton logoutBtn = new JButton("Déconnecter");
+        logoutBtn = new JButton("Déconnecter");
         TopPanel.add(logoutBtn, BorderLayout.EAST);
 
         // heading title
@@ -96,9 +95,9 @@ public class AdminView extends JFrame{
         // afficher panel
 
         String[] voitrues = {"Immatriculation", "Marque", "Model", "Etat"};
-        DefaultTableModel tableModel = new DefaultTableModel(voitrues, 0);
+        tableModel = new DefaultTableModel(voitrues, 0);
 
-        JTable table = new JTable(tableModel);
+        table = new JTable(tableModel);
 
         Object[] row1 = {"ABC123", "Toyota", "Camry", "disponible"};
         Object[] row2 = {"DEF456", "Honda", "Civic", "louée"};
