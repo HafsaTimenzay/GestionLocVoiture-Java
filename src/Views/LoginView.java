@@ -17,12 +17,12 @@ public class LoginView extends JFrame {
     public LoginView() {
 
         // Initialisation de la fenêtre
-        setTitle("Gestion Flotte Client");
+        setTitle("Page de Connection");
         setSize(800, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Panel supérieur avec titre
+        // titre
         JPanel TopPanel = new JPanel(new BorderLayout());
         TopPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 10));
 
