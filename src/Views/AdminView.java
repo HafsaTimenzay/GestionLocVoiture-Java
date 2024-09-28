@@ -5,8 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 
-// import java.awt.event.ActionEvent;
-// import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 // import javax.swing.event.ListSelectionEvent;
 // import javax.swing.event.ListSelectionListener;
 // import java.util.HashMap;
@@ -113,6 +113,15 @@ public class AdminView extends JFrame{
         mainPanel.add(scrolPane, BorderLayout.CENTER);
 
         add(mainPanel, BorderLayout.CENTER);
+
+        logoutBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                dispose();
+                LoginView login_view = new LoginView();
+                login_view.setVisible(true);
+            }
+        });
         
     }
     public static void main(String[] args) {

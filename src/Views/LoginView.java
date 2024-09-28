@@ -1,17 +1,15 @@
 package Views;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 
 public class LoginView extends JFrame {
 
-    private JTextField userField, passwordField;
+    private JTextField userField;
+    private JPasswordField passwordField;
     private JButton loginBtn;
 
     public LoginView() {
@@ -24,9 +22,9 @@ public class LoginView extends JFrame {
 
         // titre
         JPanel TopPanel = new JPanel(new BorderLayout());
-        TopPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 10));
+        TopPanel.setBorder(BorderFactory.createEmptyBorder(80, 10, 0, 10));
 
-        JLabel title = new JLabel("CLIENT GESTION FLOTTE", JLabel.CENTER);
+        JLabel title = new JLabel("PAGE DE CONNECTION", JLabel.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));
         TopPanel.add(title, BorderLayout.CENTER);
 
@@ -34,7 +32,6 @@ public class LoginView extends JFrame {
 
         // Panel pour le formulaire de connexion
         JPanel loginPanel = new JPanel();
-        loginPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0)); // Réduire encore l'espace vide en haut
         loginPanel.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -62,7 +59,7 @@ public class LoginView extends JFrame {
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.LINE_START;
-        loginPanel.add(passwordField = new JTextField(20), gbc);
+        loginPanel.add(passwordField = new JPasswordField(20), gbc);
 
         // Bouton de connexion (taille normale)
         gbc.gridx = 0;
@@ -73,6 +70,28 @@ public class LoginView extends JFrame {
         loginPanel.add(loginBtn = new JButton("sign in"), gbc);
 
         add(loginPanel, BorderLayout.CENTER);
+
+
+        loginBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                String user = userField.getText();
+                String password = passwordField.getText();
+                if(user.equalsIgnoreCase("client") && password.equals("0000")){
+                    System.out.println("client side");
+                    dispose();
+                    UserView user_view = new UserView();
+                    user_view.setVisible(true);
+                }else if(user.equalsIgnoreCase("admin") && password.equals("0000")){
+                    System.out.println("admin side");
+                    dispose();
+                    AdminView admin_view = new AdminView();
+                    admin_view.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(loginPanel, "password or username is incorrect!");
+                }
+            }
+        });
     }
 
     public static void main(String[] args) {

@@ -2,8 +2,8 @@ package Views;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+
 
 
 public class UserView extends JFrame{
@@ -51,6 +51,15 @@ public class UserView extends JFrame{
         JScrollPane scrolPane = new JScrollPane(table);
         scrolPane.setBorder(BorderFactory.createEmptyBorder(40, 20, 20, 20));
         add(scrolPane, BorderLayout.CENTER);
+
+        logoutBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                dispose();
+                LoginView login_view = new LoginView();
+                login_view.setVisible(true);
+            }
+        });
 
         table.addMouseListener(new MouseAdapter(){
             @Override
