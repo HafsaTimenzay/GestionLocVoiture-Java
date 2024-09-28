@@ -2,6 +2,10 @@ package Views;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
+
+import Services.GestionCRUD;
+import Services.GestionFlotte;
+
 import java.awt.event.*;
 
 
@@ -40,13 +44,16 @@ public class UserView extends JFrame{
 
         table = new JTable(tableModel);
 
-        Object[] row1 = {"ABC123", "Toyota", "Camry", "disponible"};
-        Object[] row2 = {"DEF456", "Honda", "Civic", "louée"};
-        Object[] row3 = {"GHI789", "Ford", "Focus", "maintenance"};
+        // Object[] row1 = {"ABC123", "Toyota", "Camry", "disponible"};
+        // Object[] row2 = {"DEF456", "Honda", "Civic", "louée"};
+        // Object[] row3 = {"GHI789", "Ford", "Focus", "maintenance"};
 
-        tableModel.addRow(row1);
-        tableModel.addRow(row2);
-        tableModel.addRow(row3);
+        // tableModel.addRow(row1);
+        // tableModel.addRow(row2);
+        // tableModel.addRow(row3);
+
+        GestionFlotte voiture = new GestionFlotte();
+        voiture.lire(tableModel);
 
         JScrollPane scrolPane = new JScrollPane(table);
         scrolPane.setBorder(BorderFactory.createEmptyBorder(40, 20, 20, 20));
@@ -67,16 +74,18 @@ public class UserView extends JFrame{
                 int row = table.rowAtPoint(e.getPoint());
                 int col = table.columnAtPoint(e.getPoint());
                 if(row >= 0 && col >= 0){
-                    Object selectedData = table.getValueAt(row, col);
+                    Object marque = table.getValueAt(row, 1);
+                    Object model = table.getValueAt(row, 2);
                     int option = JOptionPane.showConfirmDialog(
                         new UserView(),
-                        "Voulez-Vous louer le voiture "+ selectedData +" ?",
+                        "Voulez-Vous louer le voiture "+ marque+" "+model +" ?",
                         "Confirmation",
                         JOptionPane.YES_NO_OPTION
                     );
 
                     if(option == JOptionPane.YES_OPTION){
                         JOptionPane.showMessageDialog(new UserView() , "cette voiture est louée");
+                        table.setValueAt("louée", row, 3);
                     }// else if(option == JOptionPane.NO_OPTION){}
                 }
             }
@@ -84,8 +93,4 @@ public class UserView extends JFrame{
 
     }
 
-    public static void main(String[] args) {
-        UserView user_view = new UserView();
-        user_view.setVisible(true);
-    }
 }

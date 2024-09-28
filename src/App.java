@@ -1,11 +1,9 @@
-import Models.Voiture;
+import Views.LoginView;
 
 public class App {
     public static void main(String[] args) {
-    
-        Voiture v1= new Voiture("34334k","Audi", "lakher", "disponible");
-        v1.toString();
-        
+        LoginView login_view = new LoginView();
+        login_view.setVisible(true);
     }
 }
 

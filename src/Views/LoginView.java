@@ -76,14 +76,13 @@ public class LoginView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e){
                 String user = userField.getText();
-                String password = passwordField.getText();
-                if(user.equalsIgnoreCase("client") && password.equals("0000")){
-                    System.out.println("client side");
+                char[] password = passwordField.getPassword();
+                String password_str = new String(password);
+                if(user.equalsIgnoreCase("client") && password_str.equals("0000")){
                     dispose();
                     UserView user_view = new UserView();
                     user_view.setVisible(true);
-                }else if(user.equalsIgnoreCase("admin") && password.equals("0000")){
-                    System.out.println("admin side");
+                }else if(user.equalsIgnoreCase("admin") && password_str.equals("0000")){
                     dispose();
                     AdminView admin_view = new AdminView();
                     admin_view.setVisible(true);
@@ -94,8 +93,4 @@ public class LoginView extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        LoginView login_view = new LoginView();
-        login_view.setVisible(true);
-    }
 }

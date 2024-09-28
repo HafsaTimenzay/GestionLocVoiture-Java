@@ -124,8 +124,4 @@ public class AdminView extends JFrame{
         });
         
     }
-    public static void main(String[] args) {
-        AdminView admin_view = new AdminView();
-        admin_view.setVisible(true);
-    }
 }
