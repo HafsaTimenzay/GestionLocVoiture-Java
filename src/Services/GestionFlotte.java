@@ -4,36 +4,54 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
+import java.util.HashMap;
+import java.util.Arrays;
 
 public class GestionFlotte{ // implements GestionCRUD
-    
-    public void lire(DefaultTableModel tableModel) {
+
+    public void lire(DefaultTableModel tableModel, HashMap<Integer, String> voitureMap) {
      String query = "SELECT * FROM voiture";
     try (
         Connection connection = DbConnection.getConnection();
         PreparedStatement preparedStm = connection.prepareStatement(query);
         ResultSet resultSet = preparedStm.executeQuery();
     ) {
-        // EtudiantMap.clear();
+        tableModel.setRowCount(0);
         while (resultSet.next()) {
-            // int id = resultSet.getInt("id");
+            int id = resultSet.getInt("id");
             String immatriculation = resultSet.getString("immatriculation");
             String marque = resultSet.getString("marque");
             String modele = resultSet.getString("modele");
             String etat = resultSet.getString("etat");
 
             String[] voitures = {immatriculation, marque, modele, etat};
-            // Store student ID and data in the map                               
             tableModel.addRow(voitures);
-            // EtudiantMap.put(id, voitures);
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-}
+            voitureMap.put(null, Arrays.toString(voitures));
+            System.out.println(Arrays.toString(voitures));
 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ajouter(String immatriculation, String marque,String modele, Object etat){
+        String query = "INSERT INTO voiture(immatriculation, marque, modele, etat) VALUES(?,?,?,?)";
+        try (
+            Connection connection = DbConnection.getConnection();
+            PreparedStatement preparedStm = connection.prepareStatement(query);
+        ){
+            preparedStm.setString(1, immatriculation);
+            preparedStm.setString(2, marque);
+            preparedStm.setString(3, modele);
+            preparedStm.setObject(4, etat);
+            preparedStm.executeUpdate();            
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     // public Etudiant lire(int id){
     //     String query = "SELECT * FROM Etudiant WHERE id=?";
@@ -56,38 +74,40 @@ public class GestionFlotte{ // implements GestionCRUD
     // }
 
 
-    // public void mettreAjour(int id, String nom, double note){
-    //     String query = "UPDATE Etudiant SET nom = ?, note = ? WHERE id = ?";
-    //     try (
-    //         Connection connection = DbConnection.getConnection();
-    //         PreparedStatement preparedStm = connection.prepareStatement(query);
-    //     ){
-    //         preparedStm.setString(1,nom);
-    //         preparedStm.setDouble(2,note);
-    //         preparedStm.setInt(3,id);
+    public void mettreAjour(int id, String immatriculation, String marque, String modele, Object etat){
+        String query = "UPDATE voiture SET immatriculation = ?, marque = ?, modele = ?, etat = ?  WHERE id = ?";
+        try (
+            Connection connection = DbConnection.getConnection();
+            PreparedStatement preparedStm = connection.prepareStatement(query);
+        ){
+            preparedStm.setString(1,immatriculation);
+            preparedStm.setString(2,marque);
+            preparedStm.setString(3,modele);
+            preparedStm.setObject(4,etat);
+            preparedStm.setInt(5,id);
 
-    //         int rowUpd = preparedStm.executeUpdate();
-    //         if(rowUpd>0){System.out.println("Etudiant mise a jour avec succes");}
+            int rowUpd = preparedStm.executeUpdate();
+            if(rowUpd>0){System.out.println("Voiture mise a jour avec succes");}
             
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //         System.out.println("no update");
-    //     }
-    // }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("no update");
+        }
+    }
 
-    // public void supprimer(int id){
-    //     String query = "DELETE FROM Etudiant WHERE id=?";
-    //     try (
-    //         Connection connection = DbConnection.getConnection();
-    //         PreparedStatement preparedStm = connection.prepareStatement(query);
-    //     ) {
-    //         preparedStm.setInt(1,id);
-    //         int rowDelet = preparedStm.executeUpdate();
-    //         if(rowDelet>0){System.out.println("row delete with secess");}
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //     }
-    // }
+    public void supprimer(int id){
+        String query = "DELETE FROM voiture WHERE id=?";
+        try (
+            Connection connection = DbConnection.getConnection();
+            PreparedStatement preparedStm = connection.prepareStatement(query);
+        ) {
+            preparedStm.setInt(1,id);
+            int rowDelet = preparedStm.executeUpdate();
+            if(rowDelet>0){System.out.println("row delete with secess");}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
  

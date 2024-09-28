@@ -1,6 +1,5 @@
 package Models;
 
-
 public class Voiture {
 
     // Attribute
@@ -23,15 +22,19 @@ public class Voiture {
     public String getImmatriculation() {
         return immatriculation;
     }
+
     public String getMarque() {
         return marque;
     }
+
     public String getModele() {
         return modele;
     }
+
     public String getEtat() {
         return etat;
     }
+
     public static int getNbrTotVoiture() {
         return nbrTotVoiture;
     }
@@ -42,18 +45,17 @@ public class Voiture {
         return "Voiture [immatriculation=" + immatriculation + ", marque=" + marque + ", modele=" + modele + ", etat="
                 + etat + "]";
     }
-    
+
     // Equals
-    public boolean equals(Object obj){
-        if(this == obj){
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if(obj == null || getClass() != obj.getClass()){
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
         Voiture voiture = (Voiture) obj;
         return immatriculation.equals(voiture.immatriculation);
     }
-
 
 }

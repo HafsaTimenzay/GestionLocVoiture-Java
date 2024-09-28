@@ -6,4 +6,3 @@ public class App {
         login_view.setVisible(true);
     }
 }
-
