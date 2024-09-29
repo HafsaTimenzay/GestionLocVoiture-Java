@@ -10,9 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 // disable modification the table from the interface graphic
-class NonEditableTableModel extends DefaultTableModel {public NonEditableTableModel(Object[] columnNames, int rowCount) { super(columnNames, rowCount);}
+class NonEditableTableModel extends DefaultTableModel {
+    public NonEditableTableModel(Object[] columnNames, int rowCount) {
+        super(columnNames, rowCount);
+    }
+
     @Override
-    public boolean isCellEditable(int row, int column) {return false;}
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
 }
 
 public class UserView extends JFrame {
@@ -116,8 +122,4 @@ public class UserView extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        UserView user_view = new UserView();
-        user_view.setVisible(true);
-    }
 }

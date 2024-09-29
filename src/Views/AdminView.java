@@ -10,9 +10,15 @@ import java.util.Arrays;
 import Services.GestionFlotte;
 
 // disable modification the table from the interface graphic
-class NonEditableTableModel extends DefaultTableModel {public NonEditableTableModel(Object[] columnNames, int rowCount) {super(columnNames, rowCount);}
+class NonEditableTableModel extends DefaultTableModel {
+    public NonEditableTableModel(Object[] columnNames, int rowCount) {
+        super(columnNames, rowCount);
+    }
+
     @Override
-    public boolean isCellEditable(int row, int column) {return false;}
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
 }
 
 public class AdminView extends JFrame {
@@ -128,7 +134,8 @@ public class AdminView extends JFrame {
                 String marque = marqueField.getText();
                 String modele = modelField.getText();
                 Object etat = etatCombox.getSelectedItem();
-                if (!immatriculation.isEmpty() && !marque.isEmpty() && !modele.isEmpty() && !String.valueOf(etat).isEmpty()) {
+                if (!immatriculation.isEmpty() && !marque.isEmpty() && !modele.isEmpty()
+                        && !String.valueOf(etat).isEmpty()) {
                     if (selectedId == -1) {
                         voiture.ajouter(immatriculation, marque, modele, String.valueOf(etat));
                         voiture.lire(tableModel, voitureMap);
@@ -209,8 +216,4 @@ public class AdminView extends JFrame {
         voiture.lire(tableModel, voitureMap);
     }
 
-    public static void main(String[] args) {
-        AdminView admin_view = new AdminView();
-        admin_view.setVisible(true);
-    }
 }
