@@ -18,6 +18,7 @@ public class GestionFlotte{ // implements GestionCRUD
         ResultSet resultSet = preparedStm.executeQuery();
     ) {
         tableModel.setRowCount(0);
+        voitureMap.clear();
         while (resultSet.next()) {
             int id = resultSet.getInt("id");
             String immatriculation = resultSet.getString("immatriculation");
@@ -27,16 +28,16 @@ public class GestionFlotte{ // implements GestionCRUD
 
             String[] voitures = {immatriculation, marque, modele, etat};
             tableModel.addRow(voitures);
-            voitureMap.put(null, Arrays.toString(voitures));
+            voitureMap.put(id, Arrays.toString(voitures));
             System.out.println(Arrays.toString(voitures));
-
+            
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void ajouter(String immatriculation, String marque,String modele, Object etat){
+    public void ajouter(String immatriculation, String marque,String modele, String etat){
         String query = "INSERT INTO voiture(immatriculation, marque, modele, etat) VALUES(?,?,?,?)";
         try (
             Connection connection = DbConnection.getConnection();
@@ -45,7 +46,7 @@ public class GestionFlotte{ // implements GestionCRUD
             preparedStm.setString(1, immatriculation);
             preparedStm.setString(2, marque);
             preparedStm.setString(3, modele);
-            preparedStm.setObject(4, etat);
+            preparedStm.setString(4, etat);
             preparedStm.executeUpdate();            
             
         } catch (SQLException e) {
@@ -74,7 +75,7 @@ public class GestionFlotte{ // implements GestionCRUD
     // }
 
 
-    public void mettreAjour(int id, String immatriculation, String marque, String modele, Object etat){
+    public void mettreAjour(int id, String immatriculation, String marque, String modele, String etat){
         String query = "UPDATE voiture SET immatriculation = ?, marque = ?, modele = ?, etat = ?  WHERE id = ?";
         try (
             Connection connection = DbConnection.getConnection();
@@ -83,7 +84,7 @@ public class GestionFlotte{ // implements GestionCRUD
             preparedStm.setString(1,immatriculation);
             preparedStm.setString(2,marque);
             preparedStm.setString(3,modele);
-            preparedStm.setObject(4,etat);
+            preparedStm.setString(4,etat);
             preparedStm.setInt(5,id);
 
             int rowUpd = preparedStm.executeUpdate();
