@@ -1,6 +1,9 @@
 package Views;
 
 import javax.swing.*;
+
+import com.mysql.cj.jdbc.JdbcPreparedStatement;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -70,6 +73,12 @@ public class LoginView extends JFrame {
         loginPanel.add(loginBtn = new JButton("sign in"), gbc);
 
         add(loginPanel, BorderLayout.CENTER);
+
+        JPanel infoPanel = new JPanel(new FlowLayout());
+        JLabel infoLabel = new JLabel("Username : Admin / Client      Password : 0000");
+        infoLabel.setFont(new Font("Arial", Font.ITALIC, 10));
+        infoPanel.add(infoLabel);
+        add(infoPanel, BorderLayout.SOUTH);
 
 
         loginBtn.addActionListener(new ActionListener() {

@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.HashMap;
 import java.util.Arrays;
 
-public class GestionFlotte implements GestionCRUD{ 
+public class GestionFlotte implements GestionCRUD {
 
     public void lire(DefaultTableModel tableModel, HashMap<Integer, String> voitureMap) {
         String query = "SELECT * FROM voiture";
@@ -27,8 +27,7 @@ public class GestionFlotte implements GestionCRUD{
 
                 String[] voitures = { immatriculation, marque, modele, etat };
                 tableModel.addRow(voitures);
-                voitureMap.put(id, Arrays.toString(voitures));
-                System.out.println(Arrays.toString(voitures));
+                voitureMap.put(id, Arrays.toString(voitures)); // 3, [a, b, c, louee]
 
             }
         } catch (SQLException e) {
